@@ -1,4 +1,4 @@
-# EXP-5 Update the Ultrasonic sensor value in Things Mate
+# EXP-6 Update the Ultrasonic sensor value in Things Mate
 
 # AIM:
 To upload the Ultrasonic sensor value in the Things mate using Arduino controller.
