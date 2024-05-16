@@ -1,4 +1,4 @@
-# Update-the-Ultrasonic-sensor-value-in-Things Mate
+# EXP-5 Update the Ultrasonic sensor value in Things Mate
 
 # AIM:
 To upload the Ultrasonic sensor value in the Things mate using Arduino controller.
@@ -69,9 +69,56 @@ Analytics capabilities enable organizations to derive meaningful insights from t
 
 # PROGRAM:
 
-# CIRCUIT DIAGRAM:
+~~~
+
+
+#include <SoftwareSerial.h>
+#include <Adafruit_Sensor.h>
+#define triggerpin 8                 // trigger pin connected to the ultrosonic sensor 
+#define echopin 9                   // techo pin connected to the ultrosonic sensor 
+int duration, inches, cm;
+String inputString = "";         // a String to hold incoming data
+bool stringComplete = false;     // whether the string is complete
+long old_time=millis();
+long new_time;
+long uplink_interval=30000;      //ms
+bool time_to_at_recvb=false;
+bool get_LA66_data_status=false;
+bool network_joined_status=false;
+SoftwareSerial ss(10, 11);       // Arduino RX, TX ,
+char rxbuff[128];
+uint8_t rxbuff_index=0;
+void setup() {
+  pinMode(triggerpin,OUTPUT);
+  pinMode(echopin,INPUT);
+  Serial.begin(9600);
+  ss.begin(9600);
+  ss.listen();
+  inputString.reserve(200);
+  sensor_t sensor;
+  ss.println("ATZ");//reset LA66
+}
+
+~~~
+
+
+# PAYLOAD FORMAT:
+~~~
+
+function Decoder(bytes,port){
+var inch=bytes[0];
+var Centimeter=bytes[1];
+return{
+inches:inch,
+cm:Centimeter
+};
+}
+
+~~~
 
 # OUTPUT:
+<img src ="https://github.com/shrenidhi28/Update-the-Ultrasonic-sensor-value-in-cloud/assets/155261096/1b4910cf-7411-4576-a865-12ef5c3fd9cc" width=700 height=500>
+
 
 # RESULT:
 
